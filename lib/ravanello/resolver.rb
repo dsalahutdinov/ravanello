@@ -16,7 +16,7 @@ module Ravanello
     end
 
     def resolve_by_parts(node, path_parts)
-      if node.routes?(path_parts)
+      if node.routable?(path_parts)
         new_path_parts = node.route(path_parts)
         return node if new_path_parts.empty?
 

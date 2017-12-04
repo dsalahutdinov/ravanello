@@ -11,11 +11,12 @@ module Ravanello
         super(parent, &blk)
       end
 
-      def routes?(path_parts)
-        !path_parts.first.match(@regex).nil?
+      def routable?(path_parts)
+        regex == '*' ? !path_parts.empty? : !path_parts.first.match(regex).nil?
       end
 
       def route(path_parts)
+        return [] if regex == '*'
         new_path_parts = path_parts.dup
         new_path_parts.shift
 

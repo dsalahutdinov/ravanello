@@ -5,18 +5,22 @@ module Ravanello
     # Represents namespace routing element
     class Namespace < Root
       attr_reader :name
+      attr_reader :samples, :size
 
       def initialize(name, parent, &blk)
         @name = name
         super(parent, &blk)
+
+        @samples = []
+        @size = 0
       end
 
-      def routes?(path_parts)
+      def routable?(path_parts)
         path_parts.first == name
       end
 
       def route(path_parts)
-        return path_parts unless routes?(path_parts)
+        return path_parts unless routable?(path_parts)
 
         new_path_parts = path_parts.dup
         new_path_parts.shift

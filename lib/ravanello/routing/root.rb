@@ -8,10 +8,6 @@ module Ravanello
 
       def initialize(parent = nil, &blk)
         @parent = parent
-        define(&blk)
-      end
-
-      def define(&blk)
         instance_eval(&blk) if block_given?
       end
 
@@ -23,7 +19,7 @@ module Ravanello
         append_child(Ravanello::Routing::Match.new(regex.to_s, self, &blk))
       end
 
-      def routes?(*)
+      def routable?(*)
         true
       end
 

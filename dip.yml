@@ -1,0 +1,38 @@
+version: '1'
+
+environment:
+  RAILS_ENV: test
+  REDIS: 'redis://redis/test'
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  sh:
+    service: app
+
+  bundle:
+    service: app
+    command: bundle
+
+  rake:
+    service: app
+    command: bundle exec rake
+
+  rubocop:
+    service: app
+    command: bundle exec rake rubocop
+
+  rspec:
+    service: app
+    command: bundle exec rspec
+
+  clean:
+    service: app
+    command: rm -f Gemfile.lock
+
+provision:
+  - docker volume create --name bundle
+  - dip clean
+  - dip bundle install

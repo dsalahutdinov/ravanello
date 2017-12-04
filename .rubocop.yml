@@ -1,0 +1,15 @@
+AllCops:
+  Include:
+    - 'lib/**/*.rb'
+    - 'lib/**/*.rake'
+    - 'spec/**/*.rb'
+  Exclude:
+    - 'bin/**/*'
+    - 'spec/dummy/**/*'
+    - 'tmp/**/*'
+    - 'Rakefile'
+    - 'Gemfile'
+    - '*.gemspec'
+  DisplayCopNames: true
+  StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.4

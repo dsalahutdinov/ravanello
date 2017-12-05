@@ -3,12 +3,13 @@
 module Ravanello
   module Routing
     # Represents namespace routing element
-    class Namespace < Root
+    class Namespace < Base
       attr_reader :name
 
       def initialize(name, parent, &blk)
         @name = name
         super(parent, &blk)
+        children.push(Match.new('*', self)) if children.empty?
       end
 
       def routable?(path_parts)
@@ -17,15 +18,11 @@ module Ravanello
 
       def route(path_parts)
         return path_parts unless routable?(path_parts)
-
-        new_path_parts = path_parts.dup
-        new_path_parts.shift
-
-        new_path_parts
+        path_parts[1..path_parts.length - 1]
       end
 
       def to_s
-        "#{parent.to_s}#{name}#{children.empty? ? '' : ':'}"
+        "#{parent}#{name}#{children.empty? ? '' : ':'}"
       end
     end
   end

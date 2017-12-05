@@ -3,7 +3,7 @@
 module Ravanello
   module Routing
     # Represents regex match routing rule
-    class Match < Root
+    class Match < Base
       attr_reader :regex
 
       def initialize(regex, parent, &blk)
@@ -17,14 +17,11 @@ module Ravanello
 
       def route(path_parts)
         return [] if regex == '*'
-        new_path_parts = path_parts.dup
-        new_path_parts.shift
-
-        new_path_parts
+        path_parts[1..path_parts.length - 1]
       end
 
       def to_s
-        "#{parent.to_s}#{regex}#{children.empty? ? '' : ':'}"
+        "#{parent}#{regex}#{children.empty? ? '' : ':'}"
       end
     end
   end

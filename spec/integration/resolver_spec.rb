@@ -5,12 +5,8 @@ RSpec.describe Ravanello do
   let(:resolver) { Ravanello::Resolver.new(router) }
   let(:router) do
     Ravanello::Router.new do
-      namespace :mail_deliveries do
-        match '*'
-      end
-      namespace :seealso_stat do
-        match '*'
-      end
+      namespace :mail_deliveries
+      namespace :seealso_stat
       namespace :denormalization do
         namespace :users do
           match '[0-9]+'
@@ -24,56 +20,30 @@ RSpec.describe Ravanello do
         namespace :tenders do
           match '[0-9]+'
         end
-        namespace :company_statistics do
-          match '*'
-        end
+        namespace :company_statistics
         match '*'
       end
       namespace :resque do
-        namespace :delayed do
-          match '[0-9]+'
-        end
-        namespace 'resque-retry' do
-          match '*'
-        end
-        namespace 'timestamps' do
-          match '*'
-        end
-        namespace :lock do
-          match '*'
-        end
-        namespace :meta do
-          match '*'
-        end
+        namespace :delayed
+        namespace 'resque-retry'
+        namespace 'timestamps'
+        namespace :lock
+        namespace :meta
       end
 
       namespace :companies do
-        namespace :domains do
-          match '*'
-        end
-        namespace :current do
-          match '*'
-        end
+        namespace :domains
+        namespace :current
         match '*'
       end
       namespace :models do
-        namespace :apress do
-          match '*'
-        end
+        namespace :apress
         match '*'
       end
-      namespace "Redis" do
-        match '*'
-      end
-      namespace :RedisSiteRedirect do
-        match '*'
-      end
-      namespace :RedisRedirect do
-        match '*'
-      end
-      namespace 'offer_statistics' do
-        match '*'
-      end
+      namespace 'Redis'
+      namespace :RedisSiteRedirect
+      namespace :RedisRedirect
+      namespace 'offer_statistics'
       match 'showcase_order_*'
       single
       match '*'
@@ -82,15 +52,13 @@ RSpec.describe Ravanello do
   let(:data) do
     filename = File.expand_path('spec/fixtures/redis_keys.yml')
     lines = File.read(filename).split("\n")
-    lines.map do |key|
-      Ravanello::Redis::Key.new(key, double(size: 1))
-    end
+    lines.map { |key| Ravanello::Redis::Key.new(key, 1) }
   end
 
   it do
-    analyzer = Ravanello::Analyzer.new(router, data)
-    analyzer.call
-
-    Ravanello::Formatter.new(analyzer).call
+    statistics = Ravanello::Analyzer.new(router, data).call
+    Ravanello::Formatter.new(statistics).call.each do |line|
+      puts line
+    end
   end
 end

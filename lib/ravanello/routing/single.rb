@@ -3,21 +3,17 @@
 module Ravanello
   module Routing
     # Represents single item route
-    class Single < Root
-      def initialize(parent, &blk)
-        super(parent, &blk)
-      end
-
+    class Single < Base
       def routable?(path_parts)
         path_parts.length == 1
       end
 
-      def route(path_parts)
+      def route(*)
         []
       end
 
       def to_s
-        "#{parent.to_s}ANY#{children.empty? ? '' : ':'}"
+        "#{parent}ANY#{children.empty? ? '' : ':'}"
       end
     end
   end

@@ -14,7 +14,7 @@ module Ravanello
       path_parts = path.split(@separator)
       resolved = NodeResolver.new(router.root, *path_parts).call
 
-      raise Error.new("Error resolving #{path}") if resolved.nil?
+      raise Error, "Error resolving #{path}" if resolved.nil?
 
       resolved
     end

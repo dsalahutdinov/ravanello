@@ -10,23 +10,41 @@ module Ravanello
       @separator = options.fetch(:separator, ':')
     end
 
-    def resolve(path)
+    def call(path)
       path_parts = path.split(@separator)
-      resolve_by_parts(router.root, path_parts)
+      resolved = NodeResolver.new(router.root, *path_parts).call
+
+      raise Error.new("Error resolving #{path}") if resolved.nil?
+
+      resolved
     end
 
-    def resolve_by_parts(node, path_parts)
-      if node.routable?(path_parts)
-        new_path_parts = node.route(path_parts)
-        return node if new_path_parts.empty?
+    # Resolves endpoint by node
+    class NodeResolver
+      attr_reader :node, :path
 
-        node.children.each do |child|
-          r = resolve_by_parts(child, new_path_parts)
-          return r unless r.nil?
-        end
+      def initialize(node, *path)
+        @node = node
+        @path = path
       end
 
-      nil
+      def call
+        if node.routable?(path)
+          new_path = node.route(path)
+          return node if new_path.empty?
+
+          node.children.each do |child|
+            resolved = NodeResolver.new(child, *new_path).call
+            return resolved unless resolved.nil?
+          end
+        end
+
+        nil
+      end
+    end
+
+    # Represents resolving path error
+    class Error < ::StandardError
     end
   end
 end

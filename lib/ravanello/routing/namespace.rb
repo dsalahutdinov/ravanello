@@ -5,14 +5,10 @@ module Ravanello
     # Represents namespace routing element
     class Namespace < Root
       attr_reader :name
-      attr_reader :samples, :size
 
       def initialize(name, parent, &blk)
         @name = name
         super(parent, &blk)
-
-        @samples = []
-        @size = 0
       end
 
       def routable?(path_parts)
@@ -26,6 +22,10 @@ module Ravanello
         new_path_parts.shift
 
         new_path_parts
+      end
+
+      def to_s
+        "#{parent.to_s}#{name}#{children.empty? ? '' : ':'}"
       end
     end
   end

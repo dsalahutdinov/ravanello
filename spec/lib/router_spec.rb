@@ -6,7 +6,7 @@ RSpec.describe Ravanello::Router do
     let(:router) do
       Ravanello::Router.new do
         namespace :resque do
-          namespace :retry
+          namespace 'resque-retry'
         end
       end
     end
@@ -16,7 +16,7 @@ RSpec.describe Ravanello::Router do
       expect(resque_namespace.name).to eq 'resque'
 
       retry_namespace = resque_namespace.children.first
-      expect(retry_namespace.name).to eq 'retry'
+      expect(retry_namespace.name).to eq 'resque-retry'
     end
   end
 

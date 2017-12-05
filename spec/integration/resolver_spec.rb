@@ -42,32 +42,55 @@ RSpec.describe Ravanello do
         namespace :lock do
           match '*'
         end
+        namespace :meta do
+          match '*'
+        end
       end
 
       namespace :companies do
+        namespace :domains do
+          match '*'
+        end
         namespace :current do
           match '*'
         end
+        match '*'
       end
       namespace :models do
         namespace :apress do
           match '*'
         end
+        match '*'
+      end
+      namespace "Redis" do
+        match '*'
       end
       namespace :RedisSiteRedirect do
         match '*'
       end
+      namespace :RedisRedirect do
+        match '*'
+      end
+      namespace 'offer_statistics' do
+        match '*'
+      end
+      match 'showcase_order_*'
+      single
       match '*'
+    end
+  end
+  let(:data) do
+    filename = File.expand_path('spec/fixtures/redis_keys.yml')
+    lines = File.read(filename).split("\n")
+    lines.map do |key|
+      Ravanello::Redis::Key.new(key, double(size: 1))
     end
   end
 
   it do
-    filename = File.expand_path('spec/fixtures/redis_keys.yml')
-    lines = File.read(filename).split("\n")
+    analyzer = Ravanello::Analyzer.new(router, data)
+    analyzer.call
 
-    lines.each do |key|
-      r = resolver.resolve(key)
-      raise "No resolv for #{key}" if r.nil?
-    end
+    Ravanello::Formatter.new(analyzer).call
   end
 end

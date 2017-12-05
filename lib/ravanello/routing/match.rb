@@ -22,6 +22,10 @@ module Ravanello
 
         new_path_parts
       end
+
+      def to_s
+        "#{parent.to_s}#{regex}#{children.empty? ? '' : ':'}"
+      end
     end
   end
 end

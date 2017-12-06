@@ -12,22 +12,10 @@ module Ravanello
         instance_eval(&blk) if block_given?
       end
 
-      def namespace(name, &blk)
-        children.push(
-          Ravanello::Routing::Namespace.new(name.to_s, self, &blk)
-        )
-      end
-
-      def match(regex, &blk)
-        children.push(
-          Ravanello::Routing::Match.new(regex.to_s, self, &blk)
-        )
-      end
-
-      def single(&blk)
-        children.push(
-          Ravanello::Routing::Single.new(self, &blk)
-        )
+      def match(name, &blk)
+        namespace = Ravanello::Routing::Match.new(name.to_s, self, &blk)
+        children.push(namespace)
+        namespace
       end
 
       def routable?(*)

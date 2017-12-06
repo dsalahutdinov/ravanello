@@ -10,6 +10,7 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
+    #network_mode: host
 
   redis:
     image: redis

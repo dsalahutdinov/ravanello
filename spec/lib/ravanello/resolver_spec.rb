@@ -4,8 +4,8 @@ RSpec.describe Ravanello::Resolver do
   let(:resolver) { described_class.new(router) }
   let(:router) do
     Ravanello::Router.new do
-      namespace :resque do
-        namespace 'resque-retry' do
+      match :resque do
+        match 'resque-retry' do
           match '[0-9]+'
         end
       end

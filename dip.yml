@@ -32,6 +32,15 @@ interaction:
     service: app
     command: rm -f Gemfile.lock
 
+  console:
+      service: app
+      command: './bin/console'
+
+  ravanello:
+      service: app
+      command: './bin/ravanello.rb'
+
+
 provision:
   - docker volume create --name bundle
   - dip clean

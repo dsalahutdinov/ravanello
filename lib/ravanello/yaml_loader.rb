@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'yaml'
 module Ravanello
   # Loads the router from yml file
   class YamlLoader

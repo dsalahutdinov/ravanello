@@ -1,39 +1,24 @@
 rules:
   resque:
-    - delayed
-    - resque-retry
-    - timestamps
-    - lock
-    - meta
-    - '*'
-  company_statistics:
-    - 'hits_*'
-    - 'activities_*'
-    - 'visits_*'
-    - '*'
-  denormalization:
+    'delayed':
+      - '*'
+    "resque-retry":
+      - '*'
+    "timestamps":
+      - '*'
+    'lock':
+      - '*'
+    'meta':
+      - '*'
+    '*':
+  denormalized:
     - 'users'
     - 'companies'
     - 'orders'
     - 'tenders'
     - '*'
   companies:
-    - 'domains'
-    - 'current'
-    - '*'
-  models:
-    - 'apress'
-    - '*'
-  'Redis':
-    - '*'
-  'RedisSiteRedirect':
-    - '*'
-  'RedisRedirect':
-    - '*'
-  'showcase_order_*':
-  mail_deliveries:
-    - '*'
-  seealso_stat:
+    - 'dummy'
     - '*'
   # matches all other results
   '*':

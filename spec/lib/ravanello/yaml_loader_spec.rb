@@ -1,4 +1,3 @@
-# rubocop:disable BlockLength
 # frozen_string_literal: true
 
 require 'yaml'
@@ -14,16 +13,8 @@ RSpec.describe Ravanello::YamlLoader do
     rules = router.root.children.map(&:regex)
     expect(rules).to eq [
       'resque',
-      'company_statistics',
-      'denormalization',
+      'denormalized',
       'companies',
-      'models',
-      'Redis',
-      'RedisSiteRedirect',
-      'RedisRedirect',
-      'showcase_order_*',
-      'mail_deliveries',
-      'seealso_stat',
       '*'
     ]
 

@@ -5,7 +5,11 @@ require 'ravanello'
 require 'rspec'
 require 'pry-byebug'
 require 'redis'
-require 'oj'
+
+require 'simplecov'
+SimpleCov.start do
+  minimum_coverage 95
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

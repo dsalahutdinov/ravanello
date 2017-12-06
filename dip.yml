@@ -38,7 +38,7 @@ interaction:
 
   ravanello:
       service: app
-      command: './bin/ravanello.rb'
+      command: './exe/ravanello'
 
 
 provision:

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'redis'
 module Ravanello
   module Redis
     # Redis key cursor enumarable type

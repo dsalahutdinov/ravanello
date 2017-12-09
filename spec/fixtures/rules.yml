@@ -1,24 +1,14 @@
 rules:
   resque:
-    'delayed':
-      - '*'
-    "resque-retry":
-      - '*'
-    "timestamps":
-      - '*'
-    'lock':
-      - '*'
-    'meta':
-      - '*'
-    '*':
+    - 'delayed'
+    - 'resque-retry'
+    - 'timestamps'
+    - 'lock'
+    - 'meta'
   denormalized:
     - 'users'
     - 'companies'
     - 'orders'
     - 'tenders'
-    - '*'
   companies:
     - 'dummy'
-    - '*'
-  # matches all other results
-  '*':

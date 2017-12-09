@@ -11,16 +11,22 @@ module Ravanello
 
     def call
       data.map do |path|
-        size = @statistics.data[path].size
-        sample = @statistics.data[path].samples.sample.name
-        format('%-5s: %s (%s)', size.to_s, path.to_s, sample)
+        data_item = @statistics.data[path]
+        format(
+          '%-5s %-5s %s (%s)',
+          data_item.count.to_s,
+          data_item.size.to_s,
+          path.to_s,
+          data_item.samples.sample.name
+        )
       end
     end
 
     private
 
     def data
-      @statistics.data.keys.sort_by { |k| @statistics.data[k].size }.reverse
+      # @statistics.data.keys.sort_by { |k| @statistics.data[k].size }.reverse
+      @statistics.data.keys.sort_by(&:to_s)
     end
   end
 end

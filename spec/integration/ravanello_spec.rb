@@ -15,7 +15,9 @@ RSpec.describe Ravanello do
     it do
       formatted = `cat spec/fixtures/rules.yml | ./exe/ravanello`
 
-      expect(formatted).to include 'denormalized:*'
+      expect(formatted).to include 'denormalized:companies:*'
+      expect(formatted).to include 'denormalized:orders:*'
+      expect(formatted).to include 'denormalized:users:*'
       expect(formatted).to include 'resque:resque-retry:*'
       expect(formatted).to include 'resque:delayed:*'
       expect(formatted).to include 'resque:timestamps:*'

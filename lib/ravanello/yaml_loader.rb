@@ -23,6 +23,8 @@ module Ravanello
       when Array
         process_array_group(parent, yaml)
       end
+
+      parent.match('*')
     end
 
     def process_hash_group(parent, yaml)
@@ -32,7 +34,7 @@ module Ravanello
     end
 
     def process_array_group(parent, yaml)
-      yaml.each { |name| parent.match(name) }
+      yaml.each { |name| parent.match(name).match('*') }
     end
   end
 end

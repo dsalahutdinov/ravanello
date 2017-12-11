@@ -4,8 +4,8 @@ RSpec.describe Ravanello::Resolver do
   let(:resolver) { described_class.new(router) }
   let(:router) do
     Ravanello::Router.new do
-      namespace :resque do
-        namespace :retry do
+      match :resque do
+        match 'resque-retry' do
           match '[0-9]+'
         end
       end
@@ -13,9 +13,9 @@ RSpec.describe Ravanello::Resolver do
   end
 
   it do
-    expect(resolver.resolve('resque:retry:654')).not_to be_nil
-
-    r = resolver.resolve('resque:retry:-unknown')
-    expect(r).to be_nil
+    expect(resolver.call('resque:resque-retry:654')).not_to be_nil
+    expect { resolver.call('resque:resque-retry:-unknown') }.to(
+      raise_error Ravanello::Resolver::Error
+    )
   end
 end

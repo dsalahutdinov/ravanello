@@ -2,13 +2,13 @@
 
 module Ravanello
   module Redis
-    # Redis key object
+    # Redis key with debug info (holding key size)
     class Key
-      attr_reader :name, :object
+      attr_reader :name, :size
 
-      def initialize(name, object)
+      def initialize(name, size)
         @name = name
-        @object = object
+        @size = size
       end
     end
   end

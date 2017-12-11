@@ -4,6 +4,8 @@
 /coverage/
 /doc/
 /pkg/
+/coverage/
+.DS_Store
 /spec/reports/
 /tmp/
 Gemfile.lock

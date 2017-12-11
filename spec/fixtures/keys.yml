@@ -1,0 +1,17 @@
+fixtures:
+  keys:
+    - 'hello'
+    - 'denormalized:users:4763873'
+    - 'resque:delayed:1514739692'
+    - 'denormalized:companies:99585213'
+    - 'mail_deliveries:properties:delivery_user:23593:3430824'
+    - 'denormalized:users:658919'
+    - 'denormalized:users:2399635'
+    - 'denormalized:orders:1013752'
+    - 'resque:resque-retry:SomeJob:3ddd4c1acdda80728a7b929afd8ab2819fd20ee5'
+    - 'resque:timestamps:{"class":"SomeJob","args":[7388560],"queue":"some_queue"}'
+    - 'denormalized:orders:1009359'
+    - 'resque:resque-retry:SomeUserJob:06951cbbdab14944ec61c076a937f6d3fb6750b9'
+    - 'denormalized:orders:5750373'
+    - 'outstanding-key1'
+    - 'outstanding-key2'

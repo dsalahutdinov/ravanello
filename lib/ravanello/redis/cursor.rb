@@ -1,37 +1,40 @@
 # frozen_string_literal: true
 
+require 'redis'
 module Ravanello
   module Redis
     # Redis key cursor enumarable type
     class Cursor
+      SIZE_REGEX = /serializedlength:(\d*)/
+
       include Enumerable
       attr_reader :redis
 
       KEYS_BATCH_SIZE = 2_000
 
-      def initialize(redis, query: nil, limit: nil)
+      def initialize(redis, limit: nil)
         @redis = redis
-        @query = query
         @limit = limit
       end
 
       def each
-        loop do
-          cursor = 0
+        counter = 0
+        cursor = 0
+        while cursor != '0'
           cursor, keys = redis.scan(cursor, count: KEYS_BATCH_SIZE)
           keys.each do |key|
-            debug_data = redis.debug('object', key)
-
-            yield(Key.new(key, Object.new(debug_data)))
+            break if !@limit.nil? && counter >= @limit
+            counter += 1
+            yield(Key.new(key, size(key)))
           end
-          break if cursor == '0'
         end
       end
 
       private
 
-      def query
-        @query || '*'
+      def size(key)
+        debug_data = redis.debug('object', key)
+        SIZE_REGEX.match(debug_data)[1].to_i
       end
     end
   end

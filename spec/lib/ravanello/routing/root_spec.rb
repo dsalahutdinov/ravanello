@@ -6,7 +6,7 @@ RSpec.describe Ravanello::Routing::Root do
     let(:root) { described_class.new }
 
     it do
-      expect(root.routes?(path_parts)).to eq true
+      expect(root.routable?(path_parts)).to eq true
       expect(root.route(path_parts)).to eq path_parts
     end
   end

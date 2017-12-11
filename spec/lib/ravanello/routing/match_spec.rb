@@ -7,7 +7,7 @@ RSpec.describe Ravanello::Routing::Match do
     let(:namespace) { described_class.new('resque', root) }
 
     it do
-      expect(namespace.routes?(path_parts)).to eq true
+      expect(namespace.routable?(path_parts)).to eq true
       expect(namespace.route(path_parts)).to eq ['delayed']
     end
   end

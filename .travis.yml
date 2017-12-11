@@ -1,12 +1,17 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.4.1
-
+- 2.4.1
 env:
-  - REDIS='redis://localhost/test'
-
+- REDIS='redis://localhost/test'
 services:
-  - redis-server
-
+- redis-server
 before_install: gem install bundler -v 1.16.0
+deploy:
+  provider: rubygems
+  api_key:
+    secure: TAnYgBKXalCx2RcfQ02sWN9m1p7vdQ1d/YcHn8A5pLIo3D3BWzcKcgW/UcsbRnS2JHOf/p8yorsxQ7HxJZ2x6dXSdlfgF/IVawpChL0XGQymFbf0H23M7mOWR+AztVEc63T6POBGp6c5hB7Ns2PtskAdxUxLsHqAOwNJ1egeTJ04arLbDvNNs+dtnzV5FcXUgN7Jj2lGw678lHHDUSGrGk/BdIPeGigmnuGS5Zg++3UMBzXE7Pmh3jrhvB/itBB9KIEWzFf5LnxM/okrIYV919+RwFJnrdmOYqfrnGTgxADDXqpnFQgezeKUA52H/5OAKBtBZDIla5VjElfpbMYW8sKZ6nhcPNgWL7Ax5j423MiiB+ZlVpRuECzHfGMG+YP/fZkOlEyKx6A7sW78uKBrEWSTyI30SCLdU+45b5rzY3CqjDCBeb7dSkxoBTO12lL/yO1eQAuxpSMe/OWUNi9eaOuBohd+LQuopyjJQtrIydGsn4xB/+/VGrbpjXoSBp0C/6EwOX4TFBawAP4/GFxIwuk6nfazS2pvTFOzAWNwKgbSU5BNcw6ezCnjO2SB5bdANK136+yhnT1UOi73zT6/uX7PFVQymoCvC/49ZhS7s8OrlOWxA6pfm/4uU9HRXGjjwp+rVr4sVwEb6MZ3NmfWM6IpPbwnw8WCtIM8mHOafa8=
+  gem: ravanello
+  on:
+    tags: true
+    repo: dsalahutdinov/ravanello

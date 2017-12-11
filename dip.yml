@@ -38,7 +38,7 @@ interaction:
 
   ravanello:
       service: app
-      command: './exe/ravanello'
+      command: './bin/ravanello'
 
 
 provision:

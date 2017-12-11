@@ -3,7 +3,7 @@
 require 'yaml'
 module Ravanello
   # Loads the router from yml file
-  class YamlLoader
+  class Yaml
     def initialize(yaml)
       @source = YAML.safe_load(yaml)
     end

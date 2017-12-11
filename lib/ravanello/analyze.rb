@@ -13,7 +13,7 @@ module Ravanello
     end
 
     def call
-      router = YamlLoader.new(File.read(options.fetch('rules'))).call
+      router = Yaml.new(File.read(options.fetch('rules'))).call
       cursor = Redis::Cursor.new(redis, limit: redis_fetch_limit)
       statistics = Analyzer.new(router, cursor).call
       print(statistics)

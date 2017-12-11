@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-RSpec.describe Ravanello::YamlLoader do
+RSpec.describe Ravanello::Yaml do
   let(:router) do
     described_class.new(File.read('spec/fixtures/rules.yml')).call
   end

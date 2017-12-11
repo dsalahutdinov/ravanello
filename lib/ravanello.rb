@@ -11,7 +11,7 @@ require 'ravanello/resolver'
 require 'ravanello/analyzer'
 require 'ravanello/formatter'
 require 'ravanello/statistics'
-require 'ravanello/yaml_loader'
+require 'ravanello/yaml'
 require 'ravanello/cli'
 
 # Analyzes redis keys classes

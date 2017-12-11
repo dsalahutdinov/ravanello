@@ -1,20 +1,12 @@
 # Ravanello
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ravanello`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is the cli tool for analyze redis keys, what is very actual when you have many data in your redis.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Just install gem to your local environment
 
-```ruby
-gem 'ravanello'
-```
-
-And then execute:
-
-    $ bundle
+    $ gem install ravanello
 
 Or install it yourself as:
 
@@ -22,8 +14,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```bash
+FETCH_LIMIT=1000 REDIS_URL='redis://localhost/mydb' ravanello --rules rules.yml
+```
 
+You need to pass rules yml file, providing information about proposal keys structure
+
+```yml
+rules:
+  resque:
+    - 'delayed'
+    - "resque-retry"
+    - "timestamps"
+    - 'lock'
+    - 'meta'
+  denormalization:
+    - 'users'
+    - 'companies'
+    - 'orders'
+    - 'tenders'
+    - 'processed_batches'
+    - 'managers'
+  companies:
+    - 'dummy'
+```
+
+Samples of unclassified keys will be printer after analyze, and you will be able
+to add them to rules file.
+
+The FETCH_LIMIT is not required and is used for tests runs monstry (and for grouping key)
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

@@ -13,7 +13,7 @@ RSpec.describe Ravanello do
     after { redis.flushall }
 
     it do
-      formatted = `cat spec/fixtures/rules.yml | ./exe/ravanello`
+      formatted = `./bin/ravanello analyze --rules "spec/fixtures/rules.yml"`
 
       expect(formatted).to include 'denormalized:companies:*'
       expect(formatted).to include 'denormalized:orders:*'

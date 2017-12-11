@@ -12,6 +12,7 @@ require 'ravanello/analyzer'
 require 'ravanello/formatter'
 require 'ravanello/statistics'
 require 'ravanello/yaml_loader'
+require 'ravanello/cli'
 
 # Analyzes redis keys classes
 module Ravanello
